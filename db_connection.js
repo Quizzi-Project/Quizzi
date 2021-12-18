@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const consts = require('./constants');
 const { DB_HOST, DB_USER, DB_PASS } = consts;
-const url = DB_HOST;
+const connectionString = DB_HOST;
 
 const options = {
     useNewUrlparser: true,
@@ -10,7 +10,10 @@ const options = {
     pass: DB_PASS
 };
 
+
+
+
 mongoose
-    .connect(url, options)
+    .connect(connectionString, options)
     .then(() => console.log('Connected to MongoDb'))
     .catch(err => console.log(`Connection error: ${err}`));
