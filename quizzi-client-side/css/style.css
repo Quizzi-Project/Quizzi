@@ -32,7 +32,7 @@ header > h1{
 }
 
 #preliminary div{
-    width: 35%;
+    width: 45%;
     justify-content: space-between;
     flex-direction: row;
 }
@@ -59,9 +59,8 @@ header > h1{
 }
 
 .buttons{
-    width: 25%;
+    width: 30%;
     margin-top: 7%;
-    /* border: 2px solid green; */
 }
 
 .buttons > div{
