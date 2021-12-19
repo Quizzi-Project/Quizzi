@@ -2,7 +2,7 @@ const Player = require('../models/player');
 const bcrypt = require('bcrypt');
 
 
-exports.playerController = {
+exports.playersController = {
     getPlayers(req, res) {
         Player.find({}, { '__v': 0 })
             .then(docs => { res.json(docs) })
@@ -48,7 +48,20 @@ exports.playerController = {
 
    deletePlayer(req, res) {
         Player.deleteOne({id: req.params.id})
-            .then(res => { res.json('Player Deleted') })
-            .catch(err => res.status(404).send(`Error deleting player from DB: ${err} - Player not found`));
+            .then(data => {
+                if(!data.deletedCount) return res.status(404).send('Player to be deleted not found');
+                res.json('Player has been deleted successfully');
+            })
+            .catch(err => res.status(400).send(`Error deleting player from DB: ${err.message}`));
    }
 }
+
+
+// deletePlayer(req, res) {
+//     Player.deleteOne({ id: req.params.id })
+//         .then(data => {
+//             if (!data.deletedCount) return res.status(404).json({ "message": "Nothing to delete!" });
+//             res.json('Player deleted');
+//         })
+//         .catch(err => { res.status(400).json(`Error deleting Player from db ${err.message}`) });
+// }
