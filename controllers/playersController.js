@@ -6,15 +6,15 @@ exports.playersController = {
     getPlayers(req, res) {
         Player.find({}, { '__v': 0 })
             .then(docs => { res.json(docs) })
-            .catch(err => res.status(400).send(`Error getting Data from DB: ${err}`));
+            .catch(err => res.status(400).send({"error":`Error getting Data from DB: ${err}`}));
     },
 
     getPlayer(req, res) {
         Player.find({ id: req.params.id }, { '__v': 0 })
             .then(data => { 
-                if(!data.length) return res.status(404).json('Player does not exist');
+                if(!data.length) return res.status(404).json({"message": "Player does not exist"});
                 else { res.status(200).json(data); } })
-            .catch(err => res.status(400).send(`Error getting Data from DB: ${err}`));
+            .catch(err => res.status(400).send({"error":`Error getting Data from DB: ${err}`}));
     },
     
     addPlayer(req, res) {
@@ -31,9 +31,9 @@ exports.playersController = {
             const result = newPlayer.save(); 
 
             if(result) {
-                res.json('Player added successfully');
+                res.json({"message":"Player added successfully"});
             } else {
-                res.status(404).send("Error registering new player");
+                res.status(404).send({"error":"Error registering new player"});
             }
         });
     },
@@ -41,27 +41,18 @@ exports.playersController = {
     updatePlayer(req, res) {
         Player.updateOne({id: req.params.id}, req.body)
            .then(data => { 
-                   if (!data.modifiedCount) return res.status(404).json('Nothing to update!')
-                       res.json('Player Updated'); })
-           .catch(err => { res.status(400).json(err); });
+                   if (!data.modifiedCount) return res.status(404).json({"message":"Nothing to update!"});
+                       res.json({"message":"Player Updated"}); })
+            .catch(err => res.status(400).send({"error":`Error getting Data from DB: ${err}`}));
    },
 
    deletePlayer(req, res) {
         Player.deleteOne({id: req.params.id})
             .then(data => {
-                if(!data.deletedCount) return res.status(404).send('Player to be deleted not found');
-                res.json('Player has been deleted successfully');
+                if(!data.deletedCount) return res.status(404).send({"message":"Player to be deleted not found"});
+                res.json({"message":"Player has been deleted successfully"});
             })
-            .catch(err => res.status(400).send(`Error deleting player from DB: ${err.message}`));
+            .catch(err => res.status(400).send({"error":`Error deleting player from DB: ${err}`}));
    }
 }
 
-
-// deletePlayer(req, res) {
-//     Player.deleteOne({ id: req.params.id })
-//         .then(data => {
-//             if (!data.deletedCount) return res.status(404).json({ "message": "Nothing to delete!" });
-//             res.json('Player deleted');
-//         })
-//         .catch(err => { res.status(400).json(`Error deleting Player from db ${err.message}`) });
-// }

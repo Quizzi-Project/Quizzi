@@ -47,6 +47,17 @@ getTrivia().then((data) => {
         });
     });
 
-document.getElementById('next').addEventListener('click', () => {
-        location.reload();
-});
+
+// document.getElementById('next').addEventListener('click', () => {
+        // location.reload();
+        $(document).ready( () => {
+            // RELOAD PAGE ON BUTTON CLICK EVENT.
+                 $.ajax({url:'http://127.0.0.1:5500/quizzi-client-side/index.html',
+                    success: () => {
+                    $('#next').click( () => {
+                        location.reload(true); 
+                    });
+                }});
+             
+          });
+// });

@@ -10,9 +10,6 @@ const options = {
     pass: DB_PASS
 };
 
-
-
-
 mongoose
     .connect(connectionString, options)
     .then(() => console.log('Connected to MongoDb'))
