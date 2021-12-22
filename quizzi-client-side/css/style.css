@@ -5,20 +5,127 @@
     color: #ffffff;
 }
 
+html, body{
+    min-height: 100%;
+}
+
 header{
     display: block;
     margin: 0 auto;
     width: 50%;
     display: flex;
 }
+
 header > h1{
     margin-top: 5%;
     margin-left: 30%;
 }
 
+#register{
+    display: flex;
+    justify-content: center;
+}
+
+#register-header{
+    margin-left: 35%;
+    display: flex;
+    justify-content: center;
+    width: 50%;
+} 
+
+#login-user{
+    margin-left: 46%;
+}
+
+#register-header ,#login-user{
+    width: 30%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.form-group{
+    width: 50%;
+    margin-left: 25%;
+}
+
+#login{
+    width: 10%;
+    margin: 0 auto;
+}
+
+#play-header{
+    width: 80%;
+    display: flex;
+    margin-top: 5%;
+    justify-content: center;
+    margin-left: 10%;
+}
+
+#index-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 15%;
+    width: 50%;
+    margin-left: 40%;
+}
+
+#index-buttons div:last-child{
+    margin-left: 6%;
+}
+
+#primary button{
+    color: black;
+}
+
 body{
     background-image: linear-gradient(to bottom right, rgb(174, 123, 255), rgb(44, 44, 179));
 }
+
+#ques-progress{
+    border: #6624ff solid 2px;
+    width: 30rem;
+}
+
+
+#progress-bar{
+    width: 16rem;
+    height: 2rem;
+    border: 0.1rem solid #6624ff;
+    margin-top: 1.5rem;
+    margin-left: 8%;
+}
+
+#progress-bar-full{
+    height: 1.8rem;
+    background-color: #c8b9ff;
+    width: 0%;
+}
+
+.flex-column{
+    display: flex;
+    flex-direction: column;
+    margin: 5%;
+}
+
+.flex-column button:last-child{
+    margin-top: 7%;
+}
+  
+.flex-center{
+    justify-content: center;
+    align-items: center;
+}
+
+#form-user{
+    margin: 0 auto;
+    width: 50%;
+}
+
+input{
+    color: black;
+}
+
 .container{
     display: none;
     margin: 0 auto;
@@ -38,6 +145,7 @@ body{
     width: 60%;
     justify-content: space-between;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 #display{
@@ -61,8 +169,8 @@ body{
     flex-direction: column;
 }
 
-label{
-    color: black;
+label{  
+    color: #ffffff;;
 }
 
 .buttons{
@@ -88,7 +196,14 @@ label{
     margin-left: 10%;
 }
 
+#copyright-index{
+    margin-top: 30%;
+    margin-left: 18%;
+    width: 65%;
+}
+
 footer{
+    display: block;
     width: 30%;
     margin: 0 auto;
 }
@@ -99,7 +214,109 @@ footer > h6 {
 }
 
 
-
 @media (max-width: 670px) {
 
+    header{
+        display: block;
+        margin: 0 auto;
+        display: flex;
+        padding-top: 12%;
+    }
+
+    header > h1{
+        font-size: x-large;
+        margin: 0;
+    }
+
+    #login-user{
+        margin-left: 40%;
+    }
+
+    #play-header{
+        width: 40%;
+        margin-top: 8%;
+        margin-left: 28%;
+    }
+
+    #play-header h2{
+        font-size: x-large;
+    }
+
+    #index-buttons{
+        margin-left: 0;
+    }
+
+    .container{
+        display: none;
+        margin: 0;
+        display: flex;
+        padding-top: 5%;
+        flex-direction: column;
+    }
+
+    .container #question{
+        font-size: large;
+    }
+
+    #primary{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        margin-top: 10%;
+        justify-content: center;
+    }
+
+    #preliminary{
+        width: 100%;
+    }
+
+    #preliminary div{
+        width: 100%;
+        justify-content: space-between;
+    }
+    #preliminary h5{
+        font-size: small;
+    }
+
+    #content{ 
+        width: 100%;
+    }
+
+    #answers{
+        width: 160%;
+        flex-direction: column;
+    }
+
+    #answers label{
+        font-size: small;
+    }
+
+    .buttons{
+        display: flex;
+    }
+
+    .buttons > div:last-child{
+        margin: 0;
+        margin-top: 9.5%;
+        margin-left: 13%; 
+    }
+
+    #copyright{
+        margin-top: 50%;
+        margin-left: 0;
+    }
+
+    #copyright-index{
+        margin-left: 5%;
+        margin-top: 80%;
+        width: 97%;
+    }
+    
+    footer{
+        width: 70%;
+    }
+
+    footer span{
+        width: 100%;
+    }
 }

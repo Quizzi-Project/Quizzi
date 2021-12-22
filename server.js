@@ -3,41 +3,36 @@ const { playersRouter } = require("./routers/playersRouter");
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
+const path = require('path');
 // const { Server } = require("socket.io");
 // const io = new Server(server);
 const port = process.env.PORT || 3000;
+
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     res.set('Content-Type', 'application/json');
+//     next();
+// });
 
 app.use(express.json());
 
 app.use('/api/players', playersRouter);
 
-// app.use(express.static("/Quizzi/Quizzi/quizzi-client-side/css"));
-// app.use(express.static("/Quizzi/Quizzi/quizzi-client-side/js"));
+app.use('/', express.static(path.join(__dirname, 'quizzi-client-side')));
 
-// app.get('/', (req, res) => {
-//     res.sendFile(__dirname + '/quizzi-client-side/index.html');
-// });
+app.post('/quiz.html', (req, res) => {
+    res.sendFile('/quizzi-client-side/quiz.html', {root: __dirname});
+});
 
-
-// io.on('connection', (socket) => {
-//     console.log("user connected:" + socket.id);
-//     socket.on('disconnect', () => {
-//         console.log('user disconnected');
-//     });
-//     socket.on("message", (data) => {
-//         socket.broadcast.emit('message', data)
-//         socket.emit('message', data)
-//     })
-// });
+app.get('/', (req, res) => {
+    res.sendFile('/quizzi-client-side/index.html', {root: __dirname});
+});
 
 app.use((req, res) => {
     res.send('WRONG URL')
 });
     
 app.listen(port, () => {
-        console.log(`Listening on port ${port}...`)
+        console.log(`Listening on port ${port}...`);
 });
-
-// server.listen(port, () => {
-//     console.log('Listening on port 3000...');
-// });
