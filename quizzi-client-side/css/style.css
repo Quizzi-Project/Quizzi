@@ -213,6 +213,11 @@ footer > h6 {
     margin: 0 auto;
 }
 
+#end{
+    display: flex;
+    margin-top: 15%;
+    justify-content: flex-end;
+}
 
 @media (max-width: 670px) {
 
