@@ -51,7 +51,7 @@ exports.playersController = {
 
     updatePlayer(req, res) {
         Player.updateOne({id: req.params.id}, req.body)
-           .then(data => { 
+           .then(data => {
                    if (!data.modifiedCount) return res.status(404).json({"message":"Nothing to update!"});
                        res.json({"message":"Player Updated"}); })
             .catch(err => res.status(400).send({"error":`Error getting Data from DB: ${err}`}));

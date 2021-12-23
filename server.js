@@ -4,16 +4,7 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const path = require('path');
-// const { Server } = require("socket.io");
-// const io = new Server(server);
 const port = process.env.PORT || 3000;
-
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//     res.set('Content-Type', 'application/json');
-//     next();
-// });
 
 app.use(express.json());
 
@@ -30,7 +21,7 @@ app.get('/', (req, res) => {
 });
 
 app.use((req, res) => {
-    res.send('WRONG URL')
+    res.send('WRONG URL');
 });
     
 app.listen(port, () => {
