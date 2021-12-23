@@ -17,8 +17,6 @@ exports.playersController = {
     },
     
     addPlayer(req, res) {
-        
-        // console.log("im here add player " + JSON.stringify(req.body));
         let playerData;
         bcrypt.hash(req.body.password, 10, (err, hash) => {
             playerData = {
@@ -31,7 +29,6 @@ exports.playersController = {
             const newPlayer = new Player(playerData);
             const result = newPlayer.save(); 
             if(result) {
-                // res.sendFile('/quizzi-client-side/quiz.html', {root: __dirname});
                 res.json({"message":"Player added successfully"});
             } else {
                 res.status(404).send({"error":"Error registering new player"});
@@ -43,9 +40,7 @@ exports.playersController = {
         Player.find({ username: req.body.username })
             .then(result => { bcrypt.compare(req.body.password, docs[0]['password'], (err, result) => {
                 if(result) {
-                    // res.sendFile('/quizzi-client-side/quiz.html', {root: path.join(__dirname)});
-                    // res.sendFile('../quizzi-client-side/quiz.html', {root: __dirname});
-                    // res.json({"message": "Player logged in successfully"})
+                    res.json({"message": "Player logged in successfully"})
                 }
                 else { res.json({"message": "Player info doesn't match" }) }
                 });  
