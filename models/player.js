@@ -41,5 +41,5 @@ playerSchema.plugin(autoIncrement.plugin, {
   });
 
 
-const Player = model('Player', playerSchema); 
+const Player = model('Player', playerSchema);
 module.exports = Player;
