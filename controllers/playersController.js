@@ -31,7 +31,7 @@ exports.playersController = {
             if(result) {
                 res.json({"message":"Player added successfully"});
             } else {
-                res.status(404).send({"error":"Error registering new player"});
+                res.status(404).json({"error":"Error registering new player"});
             }
         });
     },
@@ -66,4 +66,3 @@ exports.playersController = {
             .catch(err => res.status(400).send({"error":`Error deleting player from DB: ${err}`}));
    }
 }
-
