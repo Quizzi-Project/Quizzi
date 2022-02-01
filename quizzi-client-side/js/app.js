@@ -1,12 +1,5 @@
 
 const url = 'https://opentdb.com/api.php?amount=10&type=multiple';
-// // ADDITION
-// const MAX_QUESTIONS = 10;
-// let questions = [];
-// let currentQuestion = {};
-// let acceptingAnswers = false;
-// const progressBarFull = document.getElementById('progress-bar-full');
-// // END ADDITION
 
 async function getTrivia() {
     let response = await fetch(url);
@@ -21,42 +14,6 @@ function shuffleArr(arr){
         [arr[i], arr[sh]] = [arr[sh], arr[i]];
     }
 }
-
-// // ADDITION
-// getNewQuestion = () => {
-//     if (availableQuestions.length === 0 || questionsCounter >= MAX_QUESTIONS) {
-//         localStorage.setItem('mostRecentScore', score);
-//         //go to the end page
-//         return window.location.assign('/endgame.html');
-//     }
-//     questionCounter++;
-//     progressText.innerText = `Question ${questionsCounter}/${MAX_QUESTIONS}`;
-//     //Update the progress bar
-//     progressBarFull.style.width = `${(questionsCounter / MAX_QUESTIONS) * 100}%`;
-
-//     const questionIndex = Math.floor(Math.random() * availableQuesions.length);
-//     currentQuestion = availableQuesions[questionIndex];
-//     question.innerText = currentQuestion.question;
-
-//     choices.forEach((choice) => {
-//         const number = choice.dataset['number'];
-//         choice.innerText = currentQuestion['choice' + number];
-//     });
-
-//     availableQuesions.splice(questionIndex, 1);
-//     acceptingAnswers = true;
-// };
-
-// startGame = () => {
-//     questionsCounter = 0;
-//     score = 0;
-//     availableQuestions = [...questions];
-//     getNewQuestion();
-// };
-
-// startGame();
-
-// END ADDITION
 
 getTrivia().then((data) => {
     const results = data.results[0];

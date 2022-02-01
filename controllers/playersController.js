@@ -27,16 +27,17 @@ exports.playersController = {
             }
         
             const newPlayer = new Player(playerData);
-            const result = newPlayer.save(); 
+            const result = newPlayer.save();
             if(result) {
                 res.json({"message":"Player added successfully"});
             } else {
-                res.status(404).send({"error":"Error registering new player"});
+                res.status(404).json({"error":"Error registering new player"});
             }
         });
     },
 
     approvePlayer(req, res) {
+        console.log("Approve Player func Im here");
         Player.find({ username: req.body.username })
             .then(result => { bcrypt.compare(req.body.password, docs[0]['password'], (err, result) => {
                 if(result) {
