@@ -5,7 +5,8 @@ app.use(express.json());
 const { playersRouter } = require("./routers/playersRouter");
 
 app
-    .use('/api/players', playersRouter);
+    .use('/api/players', playersRouter)
+    .use('/api/users', playersRouter);
 
 app
     .use((req, res) => {
