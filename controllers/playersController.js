@@ -12,17 +12,28 @@ exports.playersController = {
     getPlayer(req, res) {
         Player.find({ id: req.params.id }, { '__v': 0 })
             .then(data => {
-                if (!data.length) return res.status(404).json({ "message": "Player does not exist" });
+                if (!data.length) return res.status(404).json({ message: "Player does not exist" });
                 else { res.status(200).json(data); }
             })
             .catch(err => res.status(400).send({ "error": `Error getting Data from DB: ${err}` }));
     },
 
     addPlayer(req, res) {
-        const newPlayer = new Player(req.body);
-        newPlayer.save()
-            .then(result => { res.json({ status: 'ok' }); })
-            .catch(err => { res.status(400).json(err.message); })
+        const { email } = req.body;
+        Player.findOne({ email })
+            .then(data => {
+                if (data) return res.status(400).json({ message: "User already exists." });
+                else {
+                    const newPlayer = new Player(req.body);
+                    newPlayer.save()
+                        .then(result => { res.json({ status: 'ok' }); })
+                        .catch(err => { res.status(400).json(err.message); })
+                };
+            })
+            .catch(err => {
+
+            });
+
     },
 
 
@@ -64,9 +75,9 @@ exports.playersController = {
                             token
                         })
                     }
-                    res.status(401).json({ message: "Auth failedddd" });
+                    res.status(401).json({ message: "Auth failed" });
                 });
             });
     }
-}
+};
 
