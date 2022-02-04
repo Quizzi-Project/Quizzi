@@ -21,7 +21,7 @@ exports.playersController = {
     addPlayer(req, res) {
         const newPlayer = new Player(req.body);
         newPlayer.save()
-            .then(result => { res.json({ "message": "Player added successfully" }); })
+            .then(result => { res.json({ status: 'ok' }); })
             .catch(err => { res.status(400).json(err.message); })
     },
 
@@ -58,13 +58,13 @@ exports.playersController = {
                     }
 
                     if (result) {
-                        const token = jwt.sign({ _id: data[0]._id }, process.env.JWT_KEY, { expiresIn: "10M" });
+                        const token = jwt.sign({ _id: data[0]._id }, process.env.JWT_KEY, { expiresIn: "10H" });
                         return res.status(200).json({
                             message: 'Auth successful',
                             token
                         })
                     }
-                    res.status(401).json({ message: "Auth failed" });
+                    res.status(401).json({ message: "Auth failedddd" });
                 });
             });
     }

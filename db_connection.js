@@ -6,6 +6,7 @@ const connectionString = DB_HOST;
 const options = {
     useNewUrlparser: true,
     useUnifiedTopology: true,
+    autoIndex: true,
     user: DB_USER,
     pass: DB_PASS
 };

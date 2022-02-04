@@ -4,7 +4,7 @@ const checkAuth = require('../middlewares/checkAuth');
 
 const playersRouter = new Router();
 
-playersRouter.get('/',checkAuth, playersController.getPlayers);
+playersRouter.get('/', playersController.getPlayers);
 playersRouter.get('/:id', playersController.getPlayer);
 playersRouter.post('/', playersController.addPlayer);
 playersRouter.put('/:id', playersController.updatePlayer);
