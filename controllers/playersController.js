@@ -1,6 +1,8 @@
 const Player = require('../models/player');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const logger = require('../config/logger');
+
 
 exports.playersController = {
     getPlayers(req, res) {
@@ -70,12 +72,14 @@ exports.playersController = {
 
                     if (result) {
                         const token = jwt.sign({ _id: data[0]._id }, process.env.JWT_KEY, { expiresIn: "10H" });
+                        logger.log('info', `Successfully login to account: ${email}`);
                         return res.status(200).json({
                             message: 'Auth successful',
                             token
                         })
                     }
                     res.status(401).json({ message: "Auth failed" });
+                    logger.log('info', `Error login to account: ${email}`);
                 });
             });
     }

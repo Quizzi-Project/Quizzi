@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const logger = require('./config/logger');
 const port = process.env.PORT || 3001;
 app.use(express.json());
 const cors = require('cors')
@@ -15,5 +16,5 @@ app
         res.send('WRONG URL')
     })
     .listen(port, () => {
-        console.log(`Listening on port ${port}...`);
+        console.log('info', `Listening on port ${port}...`);
     });
