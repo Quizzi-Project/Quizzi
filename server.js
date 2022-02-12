@@ -23,5 +23,5 @@ app
         res.send('WRONG URL')
     })
     .listen(port, () => {
-        console.log('info', `Listening on port ${port}...`);
+        console.log(`Listening on port ${port}...`);
     });
