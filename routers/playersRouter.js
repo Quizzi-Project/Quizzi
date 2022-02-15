@@ -11,5 +11,4 @@ playersRouter.put('/:id', playersController.updatePlayer);
 playersRouter.delete('/:id', checkAuth, playersController.deletePlayer);
 playersRouter.post('/login', playersController.login);
 
-
 module.exports = { playersRouter };

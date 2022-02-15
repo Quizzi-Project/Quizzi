@@ -3,11 +3,10 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const logger = require('../config/logger');
 
-
 exports.playersController = {
     getPlayers(req, res) {
-        Player.find({}, { '__v': 0 })
-            .then(docs => { res.json(docs) })
+        Player.find({}, {'__v': 0}).limit(10).sort({'pointsEarned': -1})
+            .then(data => { res.json(data) })
             .catch(err => res.status(400).send({ "error": `Error getting Data from DB: ${err}` }));
     },
 
@@ -56,6 +55,7 @@ exports.playersController = {
             })
             .catch(err => res.status(400).send({ "error": `Error deleting player from DB: ${err}` }));
     },
+
     login(req, res) {
         const { email, password } = req.body;
 
