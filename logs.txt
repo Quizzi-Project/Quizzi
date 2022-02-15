@@ -49,3 +49,6 @@ info: Successfully login to account: nitsan@gmail.com {"timestamp":"2022-02-14T0
 info: Successfully login to account: nitsan@gmail.com {"timestamp":"2022-02-14T13:25:15.870Z"}
 info: Successfully login to account: nitsan@gmail.com {"timestamp":"2022-02-15T12:15:45.921Z"}
 info: Successfully login to account: nitsan1@gmail.com {"timestamp":"2022-02-15T12:53:06.414Z"}
+info: Successfully login to account: enbar2232@gmail.com {"timestamp":"2022-02-13T16:01:19.964Z"}
+info: Successfully login to account: enbar2232@gmail.com {"timestamp":"2022-02-13T16:03:10.457Z"}
+info: Successfully login to account: enbar2232@gmail.com {"timestamp":"2022-02-13T16:36:34.065Z"}
