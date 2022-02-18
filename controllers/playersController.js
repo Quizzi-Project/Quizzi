@@ -1,87 +1,118 @@
-const Player = require('../models/player');
+const { Player, getHashedPassword } = require('../models/player');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const logger = require('../config/logger');
 
 exports.playersController = {
-    getPlayers(req, res) {
-        Player.find({}, {'__v': 0}).limit(10).sort({'pointsEarned': -1})
-            .then(data => { res.json(data) })
-            .catch(err => res.status(400).send({ "error": `Error getting Data from DB: ${err}` }));
-    },
+  getPlayers(req, res) {
+    Player.find({}, { __v: 0 })
+      .limit(10)
+      .sort({ pointsEarned: -1 })
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((err) =>
+        res.status(400).send({ error: `Error getting Data from DB: ${err}` })
+      );
+  },
 
-    getPlayer(req, res) {
-        Player.find({ id: req.params.id }, { '__v': 0 })
-            .then(data => {
-                if (!data.length) return res.status(404).json({ message: "Player does not exist" });
-                else { res.status(200).json(data); }
+  getPlayer(req, res) {
+    Player.find({ id: req.params.id }, { __v: 0 })
+      .then((data) => {
+        if (!data.length)
+          return res.status(404).json({ message: 'Player does not exist' });
+        else {
+          res.status(200).json(data);
+        }
+      })
+      .catch((err) =>
+        res.status(400).send({ error: `Error getting Data from DB: ${err}` })
+      );
+  },
+
+  addPlayer(req, res) {
+    const { email } = req.body;
+    Player.findOne({ email })
+      .then((data) => {
+        if (data)
+          return res.status(400).json({ message: 'User already exists.' });
+        else {
+          const newPlayer = new Player(req.body);
+          newPlayer
+            .save()
+            .then((result) => {
+              res.json({ status: 'ok' });
             })
-            .catch(err => res.status(400).send({ "error": `Error getting Data from DB: ${err}` }));
-    },
-
-    addPlayer(req, res) {
-        const { email } = req.body;
-        Player.findOne({ email })
-            .then(data => {
-                if (data) return res.status(400).json({ message: "User already exists." });
-                else {
-                    const newPlayer = new Player(req.body);
-                    newPlayer.save()
-                        .then(result => { res.json({ status: 'ok' }); })
-                        .catch(err => { res.status(400).json(err.message); })
-                };
-            })
-            .catch(err => {
-
+            .catch((err) => {
+              res.status(400).json(err.message);
             });
+        }
+      })
+      .catch((err) => {
+        res
+          .status(400)
+          .send({ error: `Bad Request - cannot insert data to DB: ${err}` });
+      });
+  },
 
-    },
-
-
-    updatePlayer(req, res) {
-        Player.updateOne({ id: req.params.id }, req.body)
-            .then(data => {
-                if (!data.modifiedCount) return res.status(404).json({ "message": "Nothing to update!" });
-                res.json({ "message": "Player Updated" });
-            })
-            .catch(err => res.status(400).send({ "error": `Error getting Data from DB: ${err}` }));
-    },
-
-    deletePlayer(req, res) {
-        Player.deleteOne({ id: req.params.id })
-            .then(data => {
-                if (!data.deletedCount) return res.status(404).send({ "message": "Player to be deleted not found" });
-                res.json({ "message": "Player has been deleted successfully" });
-            })
-            .catch(err => res.status(400).send({ "error": `Error deleting player from DB: ${err}` }));
-    },
-
-    login(req, res) {
-        const { email, password } = req.body;
-
-        Player.find({ email })
-            .then((data) => {
-                if (data.length === 0) {
-                    return res.status(401).json({ message: "Auth failed" });
-                }
-                const [player] = data;
-                bcrypt.compare(password, player.password, (error, result) => {
-                    if (error) {
-                        return res.status(401).json({ message: "Auth failed" });
-                    }
-
-                    if (result) {
-                        const token = jwt.sign({ _id: data[0]._id }, process.env.JWT_KEY, { expiresIn: "10H" });
-                        logger.log('info', `Successfully login to account: ${email}`);
-                        return res.status(200).json({
-                            id: data[0].id,
-                            token
-                        })
-                    }
-                    res.status(401).json({ message: "Auth failed" });
-                    logger.log('info', `Error login to account: ${email}`);
-                });
-            });
+  async updatePlayer(req, res) {
+    const reqBody = { ...req.body };
+    if (reqBody.password) {
+      reqBody.password = await getHashedPassword(reqBody.password);
+    } else {
+      delete reqBody['password'];
     }
-};
+    Player.updateOne({ id: req.params.id }, reqBody)
+      .then((data) => {
+        if (!data.modifiedCount)
+          return res.status(404).json({ message: 'Nothing to update!' });
+        res.json({ message: 'Player Updated' });
+      })
+      .catch((err) =>
+        res.status(400).send({ error: `Error getting Data from DB: ${err}` })
+      );
+  },
 
+  deletePlayer(req, res) {
+    Player.deleteOne({ id: req.params.id })
+      .then((data) => {
+        if (!data.deletedCount)
+          return res
+            .status(404)
+            .send({ message: 'Player to be deleted not found' });
+        res.json({ message: 'Player has been deleted successfully' });
+      })
+      .catch((err) =>
+        res.status(400).send({ error: `Error deleting player from DB: ${err}` })
+      );
+  },
+
+  login(req, res) {
+    const { email, password } = req.body;
+
+    Player.find({ email }).then((data) => {
+      if (data.length === 0) {
+        return res.status(401).json({ message: 'Auth failed' });
+      }
+      const [player] = data;
+      bcrypt.compare(password, player.password, (error, result) => {
+        if (error) {
+          return res.status(401).json({ message: 'Auth failed' });
+        }
+
+        if (result) {
+          const token = jwt.sign({ _id: data[0]._id }, process.env.JWT_KEY, {
+            expiresIn: '10H',
+          });
+          logger.log('info', `Successfully login to account: ${email}`);
+          return res.status(200).json({
+            id: data[0].id,
+            token,
+          });
+        }
+        res.status(401).json({ message: 'Auth failed' });
+        logger.log('info', `Error login to account: ${email}`);
+      });
+    });
+  },
+};
