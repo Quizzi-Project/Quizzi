@@ -73,3 +73,9 @@ info: Successfully login to account: nitsan1@gmail.com {"timestamp":"2022-02-19T
 info: Successfully login to account: nitsan1@gmail.com {"timestamp":"2022-02-19T09:53:44.656Z"}
 info: Successfully login to account: nitsan1@gmail.com {"timestamp":"2022-02-19T12:27:11.570Z"}
 info: Successfully login to account: nitsan1@gmail.com {"timestamp":"2022-02-19T12:28:57.278Z"}
+info: Successfully login to account: guy@gmail.com {"timestamp":"2022-02-19T14:25:44.311Z"}
+info: Successfully login to account: nitsan1@gmail.com {"timestamp":"2022-02-19T18:07:37.375Z"}
+info: Successfully login to account: guy@gmail.com {"timestamp":"2022-02-19T18:09:30.844Z"}
+info: Successfully login to account: guy@gmail.com {"timestamp":"2022-02-19T18:09:56.000Z"}
+info: Successfully login to account: nitsan1@gmail.com {"timestamp":"2022-02-19T18:15:39.014Z"}
+info: Successfully login to account: nitsan1@gmail.com {"timestamp":"2022-02-19T18:18:35.872Z"}
