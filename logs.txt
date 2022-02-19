@@ -67,3 +67,4 @@ info: Successfully login to account: nitzan1@gmail.com {"timestamp":"2022-02-18T
 info: Error login to account: nitzan1@gmail.com {"timestamp":"2022-02-18T17:51:45.551Z"}
 info: Error login to account: nitzan1@gmail.com {"timestamp":"2022-02-18T17:51:58.960Z"}
 info: Successfully login to account: nitsan1@gmail.com {"timestamp":"2022-02-18T17:55:06.825Z"}
+info: Successfully login to account: nitsan1@gmail.com {"timestamp":"2022-02-19T06:21:07.167Z"}
