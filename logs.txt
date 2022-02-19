@@ -71,3 +71,5 @@ info: Successfully login to account: nitsan1@gmail.com {"timestamp":"2022-02-19T
 info: Successfully login to account: nitsan1@gmail.com {"timestamp":"2022-02-19T06:47:44.049Z"}
 info: Successfully login to account: nitsan1@gmail.com {"timestamp":"2022-02-19T09:48:54.652Z"}
 info: Successfully login to account: nitsan1@gmail.com {"timestamp":"2022-02-19T09:53:44.656Z"}
+info: Successfully login to account: nitsan1@gmail.com {"timestamp":"2022-02-19T12:27:11.570Z"}
+info: Successfully login to account: nitsan1@gmail.com {"timestamp":"2022-02-19T12:28:57.278Z"}

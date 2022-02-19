@@ -5,11 +5,13 @@ const port = process.env.PORT || 3001;
 app.use(express.json());
 const cors = require('cors')
 const { playersRouter } = require("./routers/playersRouter");
+// const { managerRouter } = require("./routers/managerRouter");
 app.use(cors());
 
 app
     .use('/api/players', playersRouter)
-    .use('/api/users', playersRouter);
+    .use('/api/users', playersRouter)
+    // .use('/api/managers', managerRouter);
 
 app
     .use((req, res) => {
